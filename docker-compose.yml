@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  sqlserver:
+    container_name: sqlserver
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1433:1433"
+    env_file:
+      - .env
+    volumes:
+      - sqlsystem:/var/opt/mssql/
+      - sqldata:${MSSQL_DATA_DIR}
+      - sqllog:${MSSQL_LOG_DIR}
+      - sqlbackup:${MSSQL_BACKUP_DIR}
+volumes:
+  sqlsystem:
+  sqldata:
+  sqllog:
+  sqlbackup:
+
+
+
+
+
+
+#version: "3.7"
+#
+#services:
+#  sqlserver:
+#    container_name: sqlserver
+#    image: mcr.microsoft.com/mssql/server:2019-CU24-ubuntu-20.04
+#    environment:
+#      ACCEPT_EULA: "Y"
+#      MSSQL_SA_PASSWORD: "merlin123"
+#      MSSQL_PID: "Developer"
+#    ports:
+#      - "1433:1433"
+#    volumes:
+#      - ./mssql:/var/opt/mssql
+
+
